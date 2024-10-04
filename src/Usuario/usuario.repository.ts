@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { UsuarioEntity } from './usuario.entity';
 
 @Injectable()
 export class UsuarioRepository {
-  public usuarios: any[];
+  public usuarios: UsuarioEntity[];
 
   constructor() {
     this.usuarios = [];

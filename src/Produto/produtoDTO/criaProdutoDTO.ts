@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsString,
+  IsUUID,
   MaxLength,
   Min,
   ValidateNested,
@@ -13,6 +14,8 @@ import { ImagemProdutoDTO } from './imagemProdutoDTO';
 import { Type } from 'class-transformer';
 
 export class CriaProdutoDTO {
+  @IsUUID(undefined, { message: 'Id de usuario invalido' })
+  usuarioId: string;
   @IsNotEmpty()
   nome: string;
   @IsNumber({ maxDecimalPlaces: 2, allowNaN: false, allowInfinity: false })
