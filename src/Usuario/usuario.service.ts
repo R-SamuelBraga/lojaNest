@@ -13,4 +13,11 @@ export class UsuarioService {
   public listarUsuarios() {
     return this.lista;
   }
+
+  public existeComEmail(email: string) {
+    const possivelUsuario = this.lista.find(
+      (usuario) => usuario.email === email,
+    );
+    return possivelUsuario !== undefined;
+  }
 }
