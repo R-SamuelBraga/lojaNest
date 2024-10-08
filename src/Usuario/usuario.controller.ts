@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CriaUsuarioDTO } from './UsuarioDTO/criaUsuarioDTO';
 import { UsuarioEntity } from './usuario.entity';
 import { v4 as uuid } from 'uuid';
+import { AtualizaUsuarioDTO } from './UsuarioDTO/atualizaUsuarioDTO';
 @Controller('/usuario')
 export class UsuarioController {
   constructor(private usuarioService: UsuarioService) {}
@@ -20,12 +21,27 @@ export class UsuarioController {
       id: usuarioEntity.id,
       nome: usuarioEntity.nome,
       email: usuarioEntity.email,
-      status: 'usuário criado',
+      status: 'usuário criado com sucesso',
     };
   }
 
   @Get()
   async listarUsuarios() {
     return this.usuarioService.listarUsuarios();
+  }
+
+  @Put('/:id')
+  async atualizaUsuario(
+    @Param('id') id: string,
+    @Body() novosDados: AtualizaUsuarioDTO,
+  ) {
+    const usuarioAtualizado = await this.usuarioService.atualiza(
+      id,
+      novosDados,
+    );
+    return {
+      usuario: usuarioAtualizado,
+      message: 'usuário atualizado com sucesso',
+    };
   }
 }

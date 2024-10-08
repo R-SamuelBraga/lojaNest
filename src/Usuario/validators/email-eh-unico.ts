@@ -17,7 +17,7 @@ export class EmailEhUnicoValidator implements ValidatorConstraintInterface {
     validationArguments?: ValidationArguments,
   ): Promise<boolean> {
     const usuarioComEmailEXiste = this.usuarioService.existeComEmail(value);
-    return !usuarioComEmailEXiste;
+    return usuarioComEmailEXiste;
   }
 }
 

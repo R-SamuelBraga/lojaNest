@@ -1,24 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { UsuarioRepository } from './usuario.repository';
 import { UsuarioEntity } from './usuario.entity';
+import { ListaUsuarioDTO } from './UsuarioDTO/listaUsuarioDTO';
 
 @Injectable()
 export class UsuarioService {
   constructor(private usuarioRepository: UsuarioRepository) {}
   private lista = this.usuarioRepository.usuarios;
 
-  public salvarUsuario(usuario: UsuarioEntity) {
+  async salvarUsuario(usuario: UsuarioEntity) {
     this.lista.push(usuario);
   }
 
-  public listarUsuarios() {
-    return this.lista;
+  async listarUsuarios() {
+    const usuariosSalvos = (lista) =>
+      lista.map((usuario) => new ListaUsuarioDTO(usuario.id, usuario.nome));
+    return usuariosSalvos(this.lista);
   }
 
-  public existeComEmail(email: string) {
+  async existeComEmail(email: string) {
     const possivelUsuario = this.lista.find(
       (usuario) => usuario.email === email,
     );
-    return possivelUsuario !== undefined;
+    return !(possivelUsuario !== undefined);
+  }
+
+  async atualiza(id: string, dadosdeAtualizacao: Partial<UsuarioEntity>) {
+    const possivelUsuario = this.lista.find(
+      (usuarioSalvo) => usuarioSalvo.id === id,
+    );
+
+    if (possivelUsuario) {
+      possivelUsuario.email = dadosdeAtualizacao.email;
+      possivelUsuario.nome = dadosdeAtualizacao.nome;
+      possivelUsuario.senhas = dadosdeAtualizacao.senhas;
+    }
   }
 }
