@@ -51,3 +51,7 @@ Content-Type: application/json
     }],
     "categoria": "Colecionáveis"
 }
+
+### Delete usuario
+DELETE  {{baseUrl}}/usuario/acb0d69f-4943-4e64-9bea-5a815e453786 HTTP/1.1
+Content-Type: application/json

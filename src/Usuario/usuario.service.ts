@@ -22,7 +22,7 @@ export class UsuarioService {
     const possivelUsuario = this.lista.find(
       (usuario) => usuario.email === email,
     );
-    return possivelUsuario !== undefined;
+    return possivelUsuario === undefined;
   }
 
   async atualiza(id: string, dadosdeAtualizacao: Partial<UsuarioEntity>) {
