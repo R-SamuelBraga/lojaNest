@@ -22,7 +22,7 @@ Content-Type: application/json
 
 {
   "nome": "Mario da Silva",
-  "email": "renan.silva@example.com",
+  "email": "renansilva@example.com",
   "senha": "senhaSegura123"
 }
 

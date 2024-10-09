@@ -22,7 +22,7 @@ export class UsuarioService {
     const possivelUsuario = this.lista.find(
       (usuario) => usuario.email === email,
     );
-    return !(possivelUsuario !== undefined);
+    return possivelUsuario !== undefined;
   }
 
   async atualiza(id: string, dadosdeAtualizacao: Partial<UsuarioEntity>) {
@@ -35,5 +35,12 @@ export class UsuarioService {
       possivelUsuario.nome = dadosdeAtualizacao.nome;
       possivelUsuario.senhas = dadosdeAtualizacao.senhas;
     }
+  }
+
+  async remover(id: string) {
+    const usuarioRemover = this.lista.find((usuario) => usuario.id === id);
+    this.lista = this.lista.filter((usuario) => usuario.id !== id);
+
+    return usuarioRemover;
   }
 }
