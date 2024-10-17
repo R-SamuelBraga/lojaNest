@@ -9,8 +9,6 @@ import {
 } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CriaUsuarioDTO } from './UsuarioDTO/criaUsuarioDTO';
-import { UsuarioEntity } from './usuario.entity';
-import { v4 as uuid } from 'uuid';
 import { AtualizaUsuarioDTO } from './UsuarioDTO/atualizaUsuarioDTO';
 @Controller('/usuario')
 export class UsuarioController {
@@ -18,17 +16,10 @@ export class UsuarioController {
 
   @Post()
   async criaUsuario(@Body() dadosUsuario: CriaUsuarioDTO) {
-    const usuarioEntity = new UsuarioEntity();
-
-    usuarioEntity.nome = dadosUsuario.nome;
-    usuarioEntity.email = dadosUsuario.email;
-    usuarioEntity.senhas = dadosUsuario.senha;
-    usuarioEntity.id = uuid();
-    this.usuarioService.salvarUsuario(usuarioEntity);
+    this.usuarioService.salvarUsuario(dadosUsuario);
     return {
-      id: usuarioEntity.id,
-      nome: usuarioEntity.nome,
-      email: usuarioEntity.email,
+      nome: dadosUsuario.nome,
+      email: dadosUsuario.email,
       status: 'usuário criado com sucesso',
     };
   }

@@ -6,7 +6,7 @@ GET {{baseUrl}}/ HTTP/1.1
 GET {{baseUrl}}/usuario HTTP/1.1
 
 ### Get versões de um componente
-PUT {{baseUrl}}/usuario/0918c489-17ff-4748-83ac-512f46d7be55 HTTP/1.1
+PUT {{baseUrl}}/usuario/46070e89-f001-4a2a-80f6-d0a70b41b18c HTTP/1.1
 Content-Type: application/json
 
 {
@@ -16,8 +16,7 @@ Content-Type: application/json
 }
 
 ### Get versões de um componente
-
-POST {{baseUrl}}/usuario HTTP/1.1
+POST {{baseUrl}}/usuario/ HTTP/1.1
 Content-Type: application/json
 
 {
@@ -33,7 +32,7 @@ POST {{baseUrl}}/produto HTTP/1.1
 Content-Type: application/json
 
 {
-    "usuarioId": "81f830e9-d3d5-4d5d-955d-873496102a5b",
+    "usuarioId": "0eebd5dc-b91e-4552-b6da-297134e4e5a7",
     "nome": "Figura de ação Marvel Homem Aranha Olympus Homem Aranha E6358 de Hasbro Classic",
     "valor": 70.0,
     "quantidade": 10,

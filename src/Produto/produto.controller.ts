@@ -9,26 +9,13 @@ import {
 } from '@nestjs/common';
 import { ProdutoService } from './produto.service';
 import { CriaProdutoDTO } from './produtoDTO/criaProdutoDTO';
-import { ProdutoEntity } from './produto.entity';
-import { v4 as uuid } from 'uuid';
 
 @Controller('/produto')
 export class ProdutoController {
   constructor(private produtoService: ProdutoService) {}
   @Post()
   async criaProduto(@Body() dadosProduto: CriaProdutoDTO) {
-    const produtoEntity = new ProdutoEntity();
-    produtoEntity.valor = dadosProduto.valor;
-    produtoEntity.usuarioId = dadosProduto.usuarioId;
-    produtoEntity.quantidade = dadosProduto.quantidade;
-    produtoEntity.caracteristicas = dadosProduto.caracteristicas;
-    produtoEntity.categoria = dadosProduto.categoria;
-    produtoEntity.descricao = dadosProduto.descricao;
-    produtoEntity.imagens = dadosProduto.imagens;
-    produtoEntity.nome = dadosProduto.nome;
-    produtoEntity.id = uuid();
-
-    this.produtoService.salvarProduto(produtoEntity);
+    this.produtoService.salvarProduto(dadosProduto);
 
     return { dadosProduto, status: 'Produto Criado' };
   }

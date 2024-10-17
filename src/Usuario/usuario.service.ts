@@ -2,14 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { UsuarioRepository } from './usuario.repository';
 import { UsuarioEntity } from './usuario.entity';
 import { ListaUsuarioDTO } from './UsuarioDTO/listaUsuarioDTO';
-
+import { CriaUsuarioDTO } from './UsuarioDTO/criaUsuarioDTO';
+import { v4 as uuid } from 'uuid';
 @Injectable()
 export class UsuarioService {
   constructor(private usuarioRepository: UsuarioRepository) {}
   private lista = this.usuarioRepository.usuarios;
 
-  async salvarUsuario(usuario: UsuarioEntity) {
-    this.lista.push(usuario);
+  async salvarUsuario(dadosUsuario: CriaUsuarioDTO) {
+    const usuarioEntity = new UsuarioEntity();
+
+    usuarioEntity.nome = dadosUsuario.nome;
+    usuarioEntity.email = dadosUsuario.email;
+    usuarioEntity.senha = dadosUsuario.senha;
+    usuarioEntity.id = uuid();
+
+    this.lista.push(usuarioEntity);
   }
 
   async listarUsuarios() {
@@ -33,7 +41,7 @@ export class UsuarioService {
     if (possivelUsuario) {
       possivelUsuario.email = dadosdeAtualizacao.email;
       possivelUsuario.nome = dadosdeAtualizacao.nome;
-      possivelUsuario.senhas = dadosdeAtualizacao.senhas;
+      possivelUsuario.senha = dadosdeAtualizacao.senha;
     }
   }
 
